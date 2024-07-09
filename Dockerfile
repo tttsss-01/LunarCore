@@ -2,10 +2,14 @@
 FROM openjdk:17-jdk-slim
 
 # 安装 Git 和其他必要工具
-RUN apt-get update && apt-get install -y git curl
+RUN apt-get update && apt-get install -y git curl gnupg
 
-# 安装 MongoDB（建议安装）
-RUN apt-get install -y mongodb
+# 添加 MongoDB 官方的 APT 仓库
+RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add - \
+    && echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+# 更新包列表并安装 MongoDB
+RUN apt-get update && apt-get install -y mongodb-org
 
 # 设置工作目录
 WORKDIR /app
