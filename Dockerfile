@@ -12,16 +12,21 @@ RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
 RUN apt-get update && apt-get install -y mongodb-org
 
 # 设置工作目录
-WORKDIR /app
+WORKDIR /
 
 # 克隆项目代码
 RUN git clone https://github.com/Melledy/LunarCore.git .
 
+WORKDIR /LunarCore
+
 # 下载并放置资源文件
 RUN mkdir -p resources && \
-    cd resources && \
     git clone https://github.com/Dimbreath/StarRailData.git . && \
-    curl -L https://gitlab.com/Melledy/LunarCore-Configs/-/archive/main/LunarCore-Configs-main.tar.gz | tar xz --strip=1
+    cp StarRailData/Config ./resources/ -rf && \
+    cp StarRailData/TextMap ./resources/ -rf && \
+    cp StarRailData/ExcelBin ./resources/ -rf && \
+    git clone https://gitlab.com/Melledy/LunarCore-Configs.git . && \
+    cp LunarCore-Configs/Config ./resources/ -rf
 
 # 为 gradlew 添加执行权限
 RUN chmod +x ./gradlew
