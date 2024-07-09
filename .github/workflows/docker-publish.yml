@@ -35,4 +35,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: tttsss01/lunarcore:latest
+          tags: tttsss/lunarcore:latest
