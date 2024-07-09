@@ -22,9 +22,7 @@ WORKDIR /LunarCore
 # 下载并放置资源文件
 RUN mkdir -p resources && \
     git clone https://github.com/Dimbreath/StarRailData.git && \
-    mv StarRailData/Config ./resources/ && \
-    mv StarRailData/TextMap ./resources/ && \
-    mv StarRailData/ExcelBin ./resources/ && \
+    mv StarRailData/* ./resources/ && \
     rm StarRailData -rf && \
     git clone https://gitlab.com/Melledy/LunarCore-Configs.git && \
     cp LunarCore-Configs/Config ./resources/ -rf && \
