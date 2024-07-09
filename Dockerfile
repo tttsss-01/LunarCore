@@ -22,4 +22,4 @@ RUN ./gradlew jar
 
 EXPOSE 23301 80 27017
 
-CMD ["/LunarCore/start.sh"]
+CMD ["/LunarCore/docker-start.sh"]
