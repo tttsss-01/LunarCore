@@ -35,5 +35,6 @@ RUN ./gradlew jar
 
 EXPOSE 23301
 EXPOSE 80
+EXPOSE 27017
 
-CMD ["java", "-jar", "LunarCore.jar"]
+CMD ["sh", "-c", "mongod --fork --logpath /var/log/mongodb.log && java -jar LunarCore.jar"]
