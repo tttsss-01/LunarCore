@@ -30,6 +30,8 @@ COPY . .
 RUN cp -rf /resources/StarRailData/* /LunarCore/
 RUN cp -rf /resources/LunarCore-Configs/* /LunarCore/
 
+RUN chmod +x ./gradlew
+
 RUN ./gradlew jar
 
 EXPOSE 27017
