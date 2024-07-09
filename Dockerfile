@@ -23,6 +23,9 @@ RUN mkdir -p resources && \
     git clone https://github.com/Dimbreath/StarRailData.git . && \
     curl -L https://gitlab.com/Melledy/LunarCore-Configs/-/archive/main/LunarCore-Configs-main.tar.gz | tar xz --strip=1
 
+# 为 gradlew 添加执行权限
+RUN chmod +x ./gradlew
+
 # 编译服务端核心
 RUN ./gradlew jar
 
