@@ -13,4 +13,4 @@ mkdir -p /LunarCore/resources
 cp -rf /resources/StarRailData/* /LunarCore/resources/
 cp -rf /resources/LunarCore-Configs/* /LunarCore/resources/
 
-# mongod --logpath /var/log/mongodb.log --bind_ip_all && java -jar /LunarCore/LunarCore.jar
+mongod --logpath /var/log/mongodb.log --bind_ip_all && java -jar /LunarCore/LunarCore.jar
