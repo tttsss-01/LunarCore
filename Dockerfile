@@ -11,6 +11,7 @@ RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
 RUN apt-get update && apt-get install -y mongodb-org
 
 RUN mkdir -p /LunarCore
+RUN mkdir -p /resources
 
 
 RUN if [ ! -d /resources/StarRailData ]; then \
