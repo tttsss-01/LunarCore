@@ -12,29 +12,14 @@ RUN apt-get update && apt-get install -y mongodb-org
 
 RUN mkdir -p /LunarCore
 
-RUN if [ ! -d /resources/StarRailData ]; then \
-    mkdir -p /resources/StarRailData && \
-    curl -L https://github.com/Dimbreath/StarRailData/archive/master.tar.gz | tar -xz --strip-components=1 -C /resources/StarRailData; \
-    fi 
-
-RUN if [ ! -d /resources/LunarCore-Configs ]; then \
-    mkdir -p /resources/LunarCore-Configs && \
-    curl -L https://gitlab.com/Melledy/LunarCore-Configs/-/archive/main/LunarCore-Configs-main.tar.gz | tar -xz --strip-components=1 -C /resources/LunarCore-Configs; \
-    fi
-
 WORKDIR /LunarCore
 COPY . .
 
-RUN mkdir -p /LunarCore/resources
-RUN cp -rf /resources/StarRailData/* /LunarCore/resources/
-RUN cp -rf /resources/LunarCore-Configs/* /LunarCore/resources/
-
 RUN chmod +x ./gradlew
+RUN chmod +x ./docker-start.sh
 
 RUN ./gradlew jar
 
-EXPOSE 23301
-EXPOSE 80
-EXPOSE 27017
+EXPOSE 23301 80 27017
 
-CMD ["sh", "-c", "mongod --fork --logpath /var/log/mongodb.log && java -jar LunarCore.jar"]
+CMD ["/LunarCore/start.sh"]
