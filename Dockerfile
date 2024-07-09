@@ -15,10 +15,12 @@ RUN mkdir -p /LunarCore
 
 
 RUN if [ ! -d /resources/StarRailData ]; then \
+    mkdir -p /resources/StarRailData && \
     curl -L https://github.com/Dimbreath/StarRailData/archive/master.tar.gz | tar -xz --strip-components=1 -C /resources/StarRailData; \
     fi 
 
 RUN if [ ! -d /resources/LunarCore-Configs ]; then \
+    mkdir -p /resources/LunarCore-Configs && \
     curl -L https://gitlab.com/Melledy/LunarCore-Configs/-/archive/main/LunarCore-Configs-main.tar.gz | tar -xz --strip-components=1 -C /resources/LunarCore-Configs; \
     fi
 
