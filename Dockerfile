@@ -11,8 +11,6 @@ RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
 RUN apt-get update && apt-get install -y mongodb-org
 
 RUN mkdir -p /LunarCore
-# RUN mkdir -p /resources
-
 
 RUN if [ ! -d /resources/StarRailData ]; then \
     mkdir -p /resources/StarRailData && \
@@ -27,13 +25,15 @@ RUN if [ ! -d /resources/LunarCore-Configs ]; then \
 WORKDIR /LunarCore
 COPY . .
 
-RUN cp -rf /resources/StarRailData/* /LunarCore/
-RUN cp -rf /resources/LunarCore-Configs/* /LunarCore/
+RUN mkdir -p /LunarCore/resources
+RUN cp -rf /resources/StarRailData/* /LunarCore/resources/
+RUN cp -rf /resources/LunarCore-Configs/* /LunarCore/resources/
 
 RUN chmod +x ./gradlew
 
 RUN ./gradlew jar
 
-EXPOSE 27017
+EXPOSE 23301
+EXPOSE 80
 
 CMD ["java", "-jar", "LunarCore.jar"]
