@@ -29,8 +29,8 @@ RUN chmod +x ./gradlew
 # 编译服务端核心
 RUN ./gradlew jar
 
-# 暴露应用程序端口（假设应用程序使用端口3000）
-EXPOSE 3000
+# 暴露应用程序端口
+EXPOSE 27017
 
 # 设置 MongoDB 数据目录
 VOLUME ["/data/db"]
