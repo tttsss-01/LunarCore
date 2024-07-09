@@ -15,18 +15,20 @@ RUN apt-get update && apt-get install -y mongodb-org
 WORKDIR /
 
 # 克隆项目代码
-RUN git clone https://github.com/Melledy/LunarCore.git .
+RUN git clone https://github.com/Melledy/LunarCore.git
 
 WORKDIR /LunarCore
 
 # 下载并放置资源文件
 RUN mkdir -p resources && \
     git clone https://github.com/Dimbreath/StarRailData.git . && \
-    cp StarRailData/Config ./resources/ -rf && \
-    cp StarRailData/TextMap ./resources/ -rf && \
-    cp StarRailData/ExcelBin ./resources/ -rf && \
+    mv StarRailData/Config ./resources/ -rf && \
+    mv StarRailData/TextMap ./resources/ -rf && \
+    mv StarRailData/ExcelBin ./resources/ -rf && \
+    rm StarRailData -rf && \
     git clone https://gitlab.com/Melledy/LunarCore-Configs.git . && \
-    cp LunarCore-Configs/Config ./resources/ -rf
+    cp LunarCore-Configs/Config ./resources/ -rf && \
+    rm LunarCore-Configs -rf
 
 # 为 gradlew 添加执行权限
 RUN chmod +x ./gradlew
